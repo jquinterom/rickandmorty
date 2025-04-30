@@ -1,5 +1,6 @@
 [versions]
 agp = "8.9.2"
+converterMoshi = "2.9.0"
 hiltAndroid = "2.56.2"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
@@ -10,12 +11,16 @@ lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
 composeBom = "2025.04.01"
 kotlinxCoroutinesAndroid = "1.7.3"
+moshiAdapters = "1.15.0"
+moshiKotlin = "1.15.0"
+moshiKotlinCodegen = "1.15.2"
 retrofit = "2.11.0"
 glide = "4.16.0"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -34,8 +39,10 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshiAdapters" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
+moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

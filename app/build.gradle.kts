@@ -76,6 +76,10 @@ dependencies {
   // Retrofit
   implementation(libs.retrofit)
 
-  // Gson
-  implementation(libs.converter.gson)
+  // Moshi
+  implementation(libs.moshi.kotlin) // Versión más reciente
+  implementation(libs.converter.moshi) // Converter para Retrofit
+  ksp(libs.moshi.kotlin.codegen)
+
+  implementation(libs.moshi.adapters)
 }

@@ -14,8 +14,8 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-abstract class HitModule {
+abstract class RickAndMortyApiModule {
   @Singleton
   @Binds
-  abstract fun bindHitService(impl: ApiServiceImpl): ApiService
+  abstract fun bindRickAndMortyBindService(impl: ApiServiceImpl): ApiService
 }
