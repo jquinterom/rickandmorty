@@ -2,6 +2,12 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
+
+  // KSP
+  id ("com.google.devtools.ksp")
+
+  // Hilt
+  id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -25,11 +31,11 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
   kotlinOptions {
-    jvmTarget = "11"
+    jvmTarget = "17"
   }
   buildFeatures {
     compose = true
@@ -53,4 +59,23 @@ dependencies {
   androidTestImplementation(libs.androidx.ui.test.junit4)
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
+
+  // Hilt
+  implementation (libs.hilt.android)
+  ksp (libs.hilt.compiler)
+
+  // Viewmodel
+  implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+  // Coroutines
+  implementation(libs.kotlinx.coroutines.android)
+
+  // Glide
+  implementation(libs.glide)
+
+  // Retrofit
+  implementation(libs.retrofit)
+
+  // Gson
+  implementation(libs.converter.gson)
 }
