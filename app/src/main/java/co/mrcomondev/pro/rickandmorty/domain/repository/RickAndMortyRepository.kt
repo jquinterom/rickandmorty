@@ -1,7 +1,7 @@
 package co.mrcomondev.pro.rickandmorty.domain.repository
 
-import co.mrcomondev.pro.rickandmorty.dataaccess.remote.models.ApiResponse
-import co.mrcomondev.pro.rickandmorty.dataaccess.services.ApiService
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.dtos.ApiResponse
+import co.mrcomondev.pro.rickandmorty.dataaccess.api.services.ApiService
 import javax.inject.Inject
 
 /**

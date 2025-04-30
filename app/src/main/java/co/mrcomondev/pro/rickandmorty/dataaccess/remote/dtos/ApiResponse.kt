@@ -1,4 +1,4 @@
-package co.mrcomondev.pro.rickandmorty.dataaccess.remote.models
+package co.mrcomondev.pro.rickandmorty.dataaccess.remote.dtos
 
 import com.squareup.moshi.JsonClass
 

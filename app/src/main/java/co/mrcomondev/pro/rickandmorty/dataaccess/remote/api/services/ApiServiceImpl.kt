@@ -1,6 +1,6 @@
-package co.mrcomondev.pro.rickandmorty.dataaccess.services
+package co.mrcomondev.pro.rickandmorty.dataaccess.api.services
 
-import co.mrcomondev.pro.rickandmorty.dataaccess.remote.models.ApiResponse
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.dtos.ApiResponse
 import retrofit2.Retrofit
 import javax.inject.Inject
 

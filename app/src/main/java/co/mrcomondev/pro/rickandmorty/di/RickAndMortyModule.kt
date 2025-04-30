@@ -1,7 +1,7 @@
 package co.mrcomondev.pro.rickandmorty.di
 
-import co.mrcomondev.pro.rickandmorty.dataaccess.services.ApiService
-import co.mrcomondev.pro.rickandmorty.dataaccess.services.ApiServiceImpl
+import co.mrcomondev.pro.rickandmorty.dataaccess.api.services.ApiService
+import co.mrcomondev.pro.rickandmorty.dataaccess.api.services.ApiServiceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

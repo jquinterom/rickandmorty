@@ -3,7 +3,7 @@ package co.mrcomondev.pro.rickandmorty.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.mrcomondev.pro.rickandmorty.dataaccess.remote.models.ApiResponse
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.dtos.ApiResponse
 import co.mrcomondev.pro.rickandmorty.domain.repository.RickAndMortyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
