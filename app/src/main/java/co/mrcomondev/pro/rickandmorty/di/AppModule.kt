@@ -1,6 +1,7 @@
 package co.mrcomondev.pro.rickandmorty.di
 
 import co.mrcomondev.pro.rickandmorty.common.Constants
+import co.mrcomondev.pro.rickandmorty.dataaccess.api.services.ApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -18,8 +19,7 @@ import javax.inject.Singleton
  */
 @InstallIn(SingletonComponent::class)
 @Module
-object NetworkModule {
-
+object AppModule {
 
   @Singleton
   @Provides
@@ -37,5 +37,11 @@ object NetworkModule {
       .baseUrl(Constants.URL_RICK_AND_MORTY)
       .addConverterFactory(MoshiConverterFactory.create(moshi))
       .build()
+  }
+
+  @Provides
+  @Singleton
+  fun provideApiService(retrofit: Retrofit): ApiService {
+    return retrofit.create(ApiService::class.java)
   }
 }
