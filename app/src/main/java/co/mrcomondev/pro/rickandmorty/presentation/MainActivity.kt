@@ -22,7 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
   private lateinit var viewModel: RickAndMortyViewModel
 
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -48,11 +47,12 @@ class MainActivity : ComponentActivity() {
   }
 
   private fun setupObservers() {
-    viewModel.hitResponse.observe(this) { result ->
+    viewModel.characterResponse.observe(this) { result ->
       val response = result
 
-      Log.d("MainActivityResponse", "setupObservers: $response")
+      Log.d("MainActivityResponseActivity", "setupObservers: $response")
     }
+
   }
 }
 

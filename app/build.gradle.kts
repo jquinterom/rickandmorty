@@ -78,8 +78,8 @@ dependencies {
   implementation(libs.retrofit)
 
   // Moshi
-  implementation(libs.moshi.kotlin) // Versión más reciente
-  implementation(libs.converter.moshi) // Converter para Retrofit
+  implementation(libs.moshi.kotlin)
+  implementation(libs.converter.moshi)
   ksp(libs.moshi.kotlin.codegen)
 
   implementation(libs.moshi.adapters)

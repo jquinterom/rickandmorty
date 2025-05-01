@@ -1,7 +1,14 @@
 package co.mrcomondev.pro.rickandmorty.di
 
 import co.mrcomondev.pro.rickandmorty.common.Constants
-import co.mrcomondev.pro.rickandmorty.dataaccess.api.services.ApiService
+import co.mrcomondev.pro.rickandmorty.dataaccess.dtos.CharacterDto
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.api.services.ApiService
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.ApiResponseMapper
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.CharacterMapper
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.repository.CharacterRepositoryImpl
+import co.mrcomondev.pro.rickandmorty.domain.models.CharacterDomain
+import co.mrcomondev.pro.rickandmorty.domain.repository.CharacterRepository
+import co.mrcomondev.pro.rickandmorty.domain.usecases.GetCharactersUseCase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -43,5 +50,33 @@ object AppModule {
   @Singleton
   fun provideApiService(retrofit: Retrofit): ApiService {
     return retrofit.create(ApiService::class.java)
+  }
+
+  @Provides
+  @Singleton
+  fun provideCharacterMapper(): CharacterMapper {
+    return CharacterMapper()
+  }
+
+  @Provides
+  @Singleton
+  fun provideApiResponseMapper(characterMapper: CharacterMapper): ApiResponseMapper<CharacterDto, CharacterDomain> {
+    return ApiResponseMapper(characterMapper)
+  }
+
+  @Provides
+  @Singleton
+  fun provideCharacterRepository(
+    apiService: ApiService,
+    provideApiResponseMapper: ApiResponseMapper<CharacterDto, CharacterDomain>
+  ):
+      CharacterRepository {
+    return CharacterRepositoryImpl(apiService, provideApiResponseMapper)
+  }
+
+  @Provides
+  @Singleton
+  fun provideCharacterUseCase(characterRepository: CharacterRepository): GetCharactersUseCase {
+    return GetCharactersUseCase(characterRepository)
   }
 }
