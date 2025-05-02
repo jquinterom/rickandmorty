@@ -3,6 +3,7 @@ package co.mrcomondev.pro.rickandmorty.dataaccess.remote.api.services
 import co.mrcomondev.pro.rickandmorty.dataaccess.dtos.ApiResponseDto
 import co.mrcomondev.pro.rickandmorty.dataaccess.dtos.CharacterDto
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -13,4 +14,10 @@ interface ApiService {
   suspend fun getCharacters(
     @Query("page") page: Int
   ): ApiResponseDto<CharacterDto>
+
+  @GET("character/{id}")
+  suspend fun getCharacter(
+    @Path("id") id: Int
+  ): CharacterDto
 }
+

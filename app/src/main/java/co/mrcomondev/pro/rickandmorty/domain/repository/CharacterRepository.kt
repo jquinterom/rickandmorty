@@ -9,4 +9,5 @@ import co.mrcomondev.pro.rickandmorty.domain.models.Result
  */
 interface CharacterRepository {
   suspend fun getCharacters(page: Int): Result<ApiResponse<CharacterDomain>>
+  suspend fun getCharacter(id: Int): Result<CharacterDomain>
 }

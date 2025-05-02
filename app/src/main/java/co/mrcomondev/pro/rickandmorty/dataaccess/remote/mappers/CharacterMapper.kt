@@ -13,6 +13,7 @@ class CharacterMapper @Inject constructor() : Mapper<CharacterDto, CharacterDoma
     return CharacterDomain(
       id = entity.id,
       name = entity.name,
+      image = entity.image
     )
   }
 
@@ -20,6 +21,7 @@ class CharacterMapper @Inject constructor() : Mapper<CharacterDto, CharacterDoma
     return CharacterDto(
       id = domain.id,
       name = domain.name,
+      image = domain.image
     )
   }
 }

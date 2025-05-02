@@ -68,15 +68,10 @@ object AppModule {
   @Singleton
   fun provideCharacterRepository(
     apiService: ApiService,
+    provideCharacterMapper: CharacterMapper,
     provideApiResponseMapper: ApiResponseMapper<CharacterDto, CharacterDomain>
   ):
       CharacterRepository {
-    return CharacterRepositoryImpl(apiService, provideApiResponseMapper)
-  }
-
-  @Provides
-  @Singleton
-  fun provideCharacterUseCase(characterRepository: CharacterRepository): GetCharactersUseCase {
-    return GetCharactersUseCase(characterRepository)
+    return CharacterRepositoryImpl(apiService, provideCharacterMapper , provideApiResponseMapper)
   }
 }

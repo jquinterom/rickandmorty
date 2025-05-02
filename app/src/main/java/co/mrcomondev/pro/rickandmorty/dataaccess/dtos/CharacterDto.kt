@@ -7,4 +7,4 @@ import com.squareup.moshi.JsonClass
  * Created by gesoft
  */
 @JsonClass(generateAdapter = true)
-data class CharacterDto(@Json(name = "id") val id: Int, @Json(name = "name") val name: String)
+data class CharacterDto(@Json(name = "id") val id: Int, @Json(name = "name") val name: String, @Json(name = "image") val image: String)

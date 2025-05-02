@@ -4,10 +4,10 @@ plugins {
   alias(libs.plugins.kotlin.compose)
 
   // KSP
-  id ("com.google.devtools.ksp")
+  id("com.google.devtools.ksp")
 
   // Hilt
-  id ("com.google.dagger.hilt.android")
+  id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -61,8 +61,8 @@ dependencies {
   debugImplementation(libs.androidx.ui.test.manifest)
 
   // Hilt
-  implementation (libs.hilt.android)
-  ksp (libs.hilt.compiler)
+  implementation(libs.hilt.android)
+  ksp(libs.hilt.compiler)
   implementation(libs.androidx.hilt.navigation.compose)
 
   // Viewmodel
@@ -71,8 +71,9 @@ dependencies {
   // Coroutines
   implementation(libs.kotlinx.coroutines.android)
 
-  // Glide
-  implementation(libs.glide)
+
+  // Coil
+  implementation(libs.coil.compose)
 
   // Retrofit
   implementation(libs.retrofit)
@@ -81,6 +82,8 @@ dependencies {
   implementation(libs.moshi.kotlin)
   implementation(libs.converter.moshi)
   ksp(libs.moshi.kotlin.codegen)
-
   implementation(libs.moshi.adapters)
+
+  // LiveData
+  implementation(libs.androidx.runtime.livedata)
 }
