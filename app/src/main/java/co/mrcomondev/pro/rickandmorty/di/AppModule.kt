@@ -8,7 +8,6 @@ import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.CharacterMapper
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.repository.CharacterRepositoryImpl
 import co.mrcomondev.pro.rickandmorty.domain.models.CharacterDomain
 import co.mrcomondev.pro.rickandmorty.domain.repository.CharacterRepository
-import co.mrcomondev.pro.rickandmorty.domain.usecases.GetCharactersUseCase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

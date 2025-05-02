@@ -1,18 +1,18 @@
 package co.mrcomondev.pro.rickandmorty.domain.usecases
 
-import co.mrcomondev.pro.rickandmorty.domain.models.ApiResponse
+import androidx.paging.PagingData
 import co.mrcomondev.pro.rickandmorty.domain.models.CharacterDomain
-import co.mrcomondev.pro.rickandmorty.domain.models.Result
 import co.mrcomondev.pro.rickandmorty.domain.repository.CharacterRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
  * Created by gesoft
  */
-class GetCharactersUseCase @Inject constructor(
+class GetCharactersStreamUseCase @Inject constructor(
   private val repository: CharacterRepository
 ) {
-  suspend operator fun invoke(page: Int): Result<ApiResponse<CharacterDomain>> {
-    return repository.getCharacters(page)
+  operator fun invoke(): Flow<PagingData<CharacterDomain>> {
+    return repository.getCharactersStream()
   }
 }

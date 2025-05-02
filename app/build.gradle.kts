@@ -86,4 +86,8 @@ dependencies {
 
   // LiveData
   implementation(libs.androidx.runtime.livedata)
+
+  // Pagination 3
+  implementation (libs.androidx.paging.runtime.ktx)
+  implementation (libs.androidx.paging.compose)
 }
