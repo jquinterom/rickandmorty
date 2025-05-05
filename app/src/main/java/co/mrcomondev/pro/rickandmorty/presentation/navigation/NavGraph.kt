@@ -20,10 +20,9 @@ fun NavGraph(modifier: Modifier = Modifier) {
   NavHost(
     navController = navController,
     startDestination = "character_list",
-    modifier = modifier
   ) {
     composable("character_list") {
-      CharacterListScreen { characterId ->
+      CharacterListScreen(modifier = modifier) { characterId ->
         navController.navigate("character_detail/$characterId")
       }
     }
@@ -33,7 +32,7 @@ fun NavGraph(modifier: Modifier = Modifier) {
       arguments = listOf(navArgument("characterId") { type = NavType.IntType })
     ) { backStackEntry ->
       val characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
-      CharacterDetailScreen(characterId = characterId)
+      CharacterDetailScreen(characterId = characterId, onBackPressed = { navController.popBackStack() })
     }
   }
 }

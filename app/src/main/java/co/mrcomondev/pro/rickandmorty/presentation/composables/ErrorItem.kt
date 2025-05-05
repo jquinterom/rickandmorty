@@ -18,9 +18,9 @@ import androidx.compose.ui.unit.dp
  * Created by gesoft
  */
 @Composable
-fun ErrorItem(message: String, onRetry: () -> Unit) {
+fun ErrorItem(message: String, modifier: Modifier = Modifier, onRetry: () -> Unit = {}) {
   Column(
-    modifier = Modifier
+    modifier = modifier
       .fillMaxWidth()
       .padding(16.dp),
     horizontalAlignment = Alignment.CenterHorizontally,

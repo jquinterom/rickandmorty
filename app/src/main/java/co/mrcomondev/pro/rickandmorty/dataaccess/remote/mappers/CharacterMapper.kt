@@ -8,12 +8,22 @@ import javax.inject.Inject
  * Created by gesoft
  */
 
-class CharacterMapper @Inject constructor() : Mapper<CharacterDto, CharacterDomain> {
+class CharacterMapper @Inject constructor(
+  private val originMapper: OriginMapper,
+  private val locationMapper: LocationMapper
+) : Mapper<CharacterDto, CharacterDomain> {
   override fun mapFromEntity(entity: CharacterDto): CharacterDomain {
     return CharacterDomain(
       id = entity.id,
       name = entity.name,
-      image = entity.image
+      image = entity.image,
+      episode = entity.episode,
+      status = entity.status,
+      species = entity.species,
+      gender = entity.gender,
+      type = entity.type,
+      origin = originMapper.mapFromEntity(entity.origin),
+      location = locationMapper.mapFromEntity(entity.location)
     )
   }
 
@@ -21,7 +31,14 @@ class CharacterMapper @Inject constructor() : Mapper<CharacterDto, CharacterDoma
     return CharacterDto(
       id = domain.id,
       name = domain.name,
-      image = domain.image
+      image = domain.image,
+      episode = domain.episode,
+      status = domain.status,
+      species = domain.species,
+      gender = domain.gender,
+      type = domain.type,
+      origin = originMapper.mapToEntity(domain.origin),
+      location = locationMapper.mapToEntity(domain.location)
     )
   }
 }

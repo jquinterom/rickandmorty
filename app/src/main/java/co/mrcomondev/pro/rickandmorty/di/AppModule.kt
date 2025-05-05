@@ -5,6 +5,9 @@ import co.mrcomondev.pro.rickandmorty.dataaccess.dtos.CharacterDto
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.api.services.ApiService
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.ApiResponseMapper
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.CharacterMapper
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.EpisodeMapper
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.LocationMapper
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.OriginMapper
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.repository.CharacterRepositoryImpl
 import co.mrcomondev.pro.rickandmorty.domain.models.CharacterDomain
 import co.mrcomondev.pro.rickandmorty.domain.repository.CharacterRepository
@@ -53,8 +56,23 @@ object AppModule {
 
   @Provides
   @Singleton
-  fun provideCharacterMapper(): CharacterMapper {
-    return CharacterMapper()
+  fun provideOriginMapper(): OriginMapper {
+    return OriginMapper()
+  }
+
+  @Provides
+  @Singleton
+  fun provideLocationMapper(): LocationMapper {
+    return LocationMapper()
+  }
+
+  @Provides
+  @Singleton
+  fun provideCharacterMapper(
+    originMapper: OriginMapper,
+    locationMapper: LocationMapper
+  ): CharacterMapper {
+    return CharacterMapper(originMapper, locationMapper)
   }
 
   @Provides
@@ -65,12 +83,24 @@ object AppModule {
 
   @Provides
   @Singleton
+  fun provideEpisodeMapper(): EpisodeMapper {
+    return EpisodeMapper()
+  }
+
+  @Provides
+  @Singleton
   fun provideCharacterRepository(
     apiService: ApiService,
     provideCharacterMapper: CharacterMapper,
-    provideApiResponseMapper: ApiResponseMapper<CharacterDto, CharacterDomain>
+    provideApiResponseMapper: ApiResponseMapper<CharacterDto, CharacterDomain>,
+    provideEpisodeMapper: EpisodeMapper
   ):
       CharacterRepository {
-    return CharacterRepositoryImpl(apiService, provideCharacterMapper , provideApiResponseMapper)
+    return CharacterRepositoryImpl(
+      apiService,
+      provideCharacterMapper,
+      provideApiResponseMapper,
+      provideEpisodeMapper
+    )
   }
 }

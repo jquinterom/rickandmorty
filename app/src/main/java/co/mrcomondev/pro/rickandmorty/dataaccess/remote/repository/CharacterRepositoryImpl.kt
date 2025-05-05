@@ -7,8 +7,10 @@ import co.mrcomondev.pro.rickandmorty.dataaccess.dtos.CharacterDto
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.api.services.ApiService
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.ApiResponseMapper
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.CharacterMapper
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.EpisodeMapper
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.paging.CharacterPagingSource
 import co.mrcomondev.pro.rickandmorty.domain.models.CharacterDomain
+import co.mrcomondev.pro.rickandmorty.domain.models.Episode
 import co.mrcomondev.pro.rickandmorty.domain.models.Result
 import co.mrcomondev.pro.rickandmorty.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +23,8 @@ import javax.inject.Inject
 class CharacterRepositoryImpl @Inject constructor(
   private val apiService: ApiService,
   private val characterMapper: CharacterMapper,
-  private val apiResponseMapper: ApiResponseMapper<CharacterDto, CharacterDomain>
+  private val apiResponseMapper: ApiResponseMapper<CharacterDto, CharacterDomain>,
+  private val episodeMapper: EpisodeMapper
 ) : CharacterRepository {
 
   override suspend fun getCharacter(id: Int): Result<CharacterDomain> {
@@ -43,5 +46,10 @@ class CharacterRepositoryImpl @Inject constructor(
         CharacterPagingSource(apiService, apiResponseMapper)
       }
     ).flow
+  }
+
+  override suspend fun getEpisodes(episodeIds: List<Int>): List<Episode> {
+    val response = apiService.getEpisodes(episodeIds.toString())
+    return response.map { episodeMapper.mapFromEntity(it) }
   }
 }

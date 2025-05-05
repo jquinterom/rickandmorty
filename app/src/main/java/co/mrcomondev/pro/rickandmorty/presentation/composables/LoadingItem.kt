@@ -1,7 +1,7 @@
 package co.mrcomondev.pro.rickandmorty.presentation.composables
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -13,11 +13,11 @@ import androidx.compose.ui.unit.dp
  * Created by gesoft
  */
 @Composable
-fun FullScreenLoading() {
+fun LoadingItem() {
   Box(
     modifier = Modifier
-      .padding(16.dp)
-      .fillMaxSize(),
+      .fillMaxWidth()
+      .padding(16.dp),
     contentAlignment = Alignment.Center
   ) {
     CircularProgressIndicator()

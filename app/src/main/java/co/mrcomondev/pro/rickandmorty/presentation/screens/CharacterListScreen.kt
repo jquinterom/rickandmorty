@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import co.mrcomondev.pro.rickandmorty.presentation.composables.CharacterItem
 import co.mrcomondev.pro.rickandmorty.presentation.composables.ErrorItem
 import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenError
 import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenLoading
@@ -22,12 +23,13 @@ import co.mrcomondev.pro.rickandmorty.presentation.viewmodel.CharacterListViewMo
  */
 @Composable
 fun CharacterListScreen(
+  modifier: Modifier = Modifier,
   viewModel: CharacterListViewModel = hiltViewModel(),
   onCharacterClick: (Int) -> Unit
 ) {
   val lazyPagingItems = viewModel.charactersPagingFlow.collectAsLazyPagingItems()
 
-  Box(modifier = Modifier.fillMaxSize()) {
+  Box(modifier = modifier.fillMaxSize()) {
     when (lazyPagingItems.loadState.refresh) {
       is LoadState.Loading -> {
         FullScreenLoading()
