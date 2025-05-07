@@ -23,13 +23,12 @@ import co.mrcomondev.pro.rickandmorty.presentation.viewmodel.CharacterListViewMo
  */
 @Composable
 fun CharacterListScreen(
-  modifier: Modifier = Modifier,
   viewModel: CharacterListViewModel = hiltViewModel(),
   onCharacterClick: (Int) -> Unit
 ) {
   val lazyPagingItems = viewModel.charactersPagingFlow.collectAsLazyPagingItems()
 
-  Box(modifier = modifier.fillMaxSize()) {
+  Box(modifier = Modifier.fillMaxSize()) {
     when (lazyPagingItems.loadState.refresh) {
       is LoadState.Loading -> {
         FullScreenLoading()
