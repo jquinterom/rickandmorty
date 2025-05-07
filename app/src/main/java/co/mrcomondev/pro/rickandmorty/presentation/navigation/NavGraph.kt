@@ -17,7 +17,7 @@ import co.mrcomondev.pro.rickandmorty.presentation.screens.LocationListScreen
 fun NavGraph(navController: NavHostController) {
   NavHost(
     navController = navController,
-    startDestination = AppDestinations.Episodes,
+    startDestination = AppDestinations.Characters,
   ) {
     composable<AppDestinations.Characters> {
       CharacterListScreen { characterId ->
