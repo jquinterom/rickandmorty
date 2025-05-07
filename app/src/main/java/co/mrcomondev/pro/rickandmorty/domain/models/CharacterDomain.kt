@@ -14,5 +14,5 @@ data class CharacterDomain(
   val gender: String,
   val type: String,
   val origin: Origin,
-  val location: LocationDomain
+  val locationName: String
 )

@@ -1,5 +1,6 @@
 package co.mrcomondev.pro.rickandmorty.presentation.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -108,7 +109,7 @@ private fun CharacterHeaderSection(character: CharacterDomain) {
     modifier = Modifier
       .fillMaxWidth()
   ) {
-    CharacterImage(modifier = Modifier.size(200.dp), image = character.image, name = character.name)
+    CharacterImage(modifier = Modifier.size(180.dp), image = character.image, name = character.name)
 
     Spacer(modifier = Modifier.height(16.dp))
 
@@ -140,15 +141,15 @@ private fun CharacterInfoSection(character: CharacterDomain) {
     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
   ) {
     Column(modifier = Modifier.padding(16.dp)) {
-      InfoRow(label = "Género", value = character.gender)
+      InfoRow(label = "Gender", value = character.gender)
       HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-      InfoRow(label = "Tipo", value = character.type.ifEmpty { "Desconocido" })
+      InfoRow(label = "Type", value = character.type.ifEmpty { "Unknown" })
       HorizontalDivider(
         modifier = Modifier.padding(vertical = 8.dp),
       )
-      InfoRow(label = "Origen", value = character.origin.name)
+      InfoRow(label = "Origin", value = character.origin.name)
       HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-      InfoRow(label = "Ubicación", value = character.location.name)
+      InfoRow(label = "Location", value = character.locationName)
     }
   }
 }
@@ -159,7 +160,7 @@ private fun EpisodesSection(episodesState: EpisodesState, totalEpisodes: Int) {
     modifier = Modifier
       .padding(16.dp)
       .fillMaxWidth()
-      .height(200.dp)
+      .height(180.dp)
   ) {
     Column {
       Text(

@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import co.mrcomondev.pro.rickandmorty.dataaccess.dtos.CharacterDto
-import co.mrcomondev.pro.rickandmorty.dataaccess.remote.api.services.ApiService
+import co.mrcomondev.pro.rickandmorty.dataaccess.remote.api.services.CharacterApiService
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.ApiResponseMapper
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.CharacterMapper
 import co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers.EpisodeMapper
@@ -21,7 +21,7 @@ import javax.inject.Inject
  */
 
 class CharacterRepositoryImpl @Inject constructor(
-  private val apiService: ApiService,
+  private val characterApiService: CharacterApiService,
   private val characterMapper: CharacterMapper,
   private val apiResponseMapper: ApiResponseMapper<CharacterDto, CharacterDomain>,
   private val episodeMapper: EpisodeMapper
@@ -29,7 +29,7 @@ class CharacterRepositoryImpl @Inject constructor(
 
   override suspend fun getCharacter(id: Int): Result<CharacterDomain> {
     return try {
-      val response = apiService.getCharacter(id)
+      val response = characterApiService.getCharacter(id)
       Result.Success(characterMapper.mapFromEntity(response))
     } catch (e: Exception) {
       Result.Failure(e)
@@ -43,13 +43,13 @@ class CharacterRepositoryImpl @Inject constructor(
         enablePlaceholders = false
       ),
       pagingSourceFactory = {
-        CharacterPagingSource(apiService, apiResponseMapper)
+        CharacterPagingSource(characterApiService, apiResponseMapper)
       }
     ).flow
   }
 
   override suspend fun getEpisodes(episodeIds: List<Int>): List<Episode> {
-    val response = apiService.getEpisodes(episodeIds.toString())
+    val response = characterApiService.getEpisodes(episodeIds.toString())
     return response.map { episodeMapper.mapFromEntity(it) }
   }
 }

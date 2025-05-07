@@ -10,13 +10,21 @@ import javax.inject.Inject
 class LocationMapper @Inject constructor() : Mapper<LocationDto, LocationDomain> {
   override fun mapFromEntity(entity: LocationDto): LocationDomain {
     return LocationDomain(
+      id = entity.id,
       name = entity.name,
+      type = entity.type,
+      dimension = entity.dimension,
+      residents = entity.residents,
     )
   }
 
   override fun mapToEntity(domain: LocationDomain): LocationDto {
     return LocationDto(
+      id = domain.id,
       name = domain.name,
+      type = domain.type,
+      dimension = domain.dimension,
+      residents = domain.residents,
     )
   }
 }

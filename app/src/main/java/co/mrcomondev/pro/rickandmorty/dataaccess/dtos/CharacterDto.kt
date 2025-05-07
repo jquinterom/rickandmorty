@@ -6,6 +6,8 @@ import com.squareup.moshi.JsonClass
 /**
  * Created by gesoft
  */
+
+
 @JsonClass(generateAdapter = true)
 data class CharacterDto(
   @Json(name = "id") val id: Int,
@@ -17,5 +19,5 @@ data class CharacterDto(
   @Json(name = "gender") val gender: String,
   @Json(name = "type") val type: String,
   @Json(name = "origin") val origin: OriginDto,
-  @Json(name = "location") val location: LocationDto
+  @Json(name = "location") val location: SimpleNameUrlDto
 )

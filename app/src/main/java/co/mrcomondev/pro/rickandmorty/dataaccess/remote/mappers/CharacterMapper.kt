@@ -1,16 +1,15 @@
 package co.mrcomondev.pro.rickandmorty.dataaccess.remote.mappers
 
 import co.mrcomondev.pro.rickandmorty.dataaccess.dtos.CharacterDto
+import co.mrcomondev.pro.rickandmorty.dataaccess.dtos.SimpleNameUrlDto
 import co.mrcomondev.pro.rickandmorty.domain.models.CharacterDomain
 import javax.inject.Inject
 
 /**
  * Created by gesoft
  */
-
 class CharacterMapper @Inject constructor(
   private val originMapper: OriginMapper,
-  private val locationMapper: LocationMapper
 ) : Mapper<CharacterDto, CharacterDomain> {
   override fun mapFromEntity(entity: CharacterDto): CharacterDomain {
     return CharacterDomain(
@@ -23,7 +22,7 @@ class CharacterMapper @Inject constructor(
       gender = entity.gender,
       type = entity.type,
       origin = originMapper.mapFromEntity(entity.origin),
-      location = locationMapper.mapFromEntity(entity.location)
+      locationName = entity.location.name
     )
   }
 
@@ -38,7 +37,9 @@ class CharacterMapper @Inject constructor(
       gender = domain.gender,
       type = domain.type,
       origin = originMapper.mapToEntity(domain.origin),
-      location = locationMapper.mapToEntity(domain.location)
+      location = SimpleNameUrlDto(
+        name = domain.locationName
+      )
     )
   }
 }
