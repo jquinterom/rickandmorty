@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import co.mrcomondev.pro.rickandmorty.presentation.navigation.BottomNavItem
+import co.mrcomondev.pro.rickandmorty.presentation.navigation.AppDestinations
 
 /**
  * Created by gesoft
@@ -16,10 +16,10 @@ import co.mrcomondev.pro.rickandmorty.presentation.navigation.BottomNavItem
 @Composable
 fun BottomNavigationBar(
   navController: NavController,
-  currentRoute: String?
+  currentRoute: AppDestinations?
 ) {
   NavigationBar {
-    BottomNavItem.getItems().forEach { item ->
+    AppDestinations.getBottomNavItems().forEach { item ->
       NavigationBarItem(
         icon = {
           Icon(
@@ -28,10 +28,10 @@ fun BottomNavigationBar(
           )
         },
         label = { Text(item.title) },
-        selected = currentRoute == item.route,
+        selected = currentRoute == item.destination,
         onClick = {
           try {
-            navController.navigate(item.route) {
+            navController.navigate(item.destination) {
               launchSingleTop = true
               restoreState = true
               popUpTo(navController.graph.findStartDestination().id) {
@@ -39,7 +39,7 @@ fun BottomNavigationBar(
               }
             }
           } catch (e: Exception) {
-            Log.e("Navigation", "Error navigating to ${item.route}", e)
+            Log.e("Navigation", "Error navigating to ${item.destination}", e)
           }
         }
       )

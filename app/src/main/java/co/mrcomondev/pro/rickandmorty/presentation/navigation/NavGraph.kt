@@ -2,10 +2,9 @@ package co.mrcomondev.pro.rickandmorty.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import co.mrcomondev.pro.rickandmorty.presentation.screens.CharacterDetailScreen
 import co.mrcomondev.pro.rickandmorty.presentation.screens.CharacterListScreen
 import co.mrcomondev.pro.rickandmorty.presentation.screens.EpisodeListScreen
@@ -18,36 +17,31 @@ import co.mrcomondev.pro.rickandmorty.presentation.screens.LocationListScreen
 fun NavGraph(navController: NavHostController) {
   NavHost(
     navController = navController,
-    startDestination = BottomNavItem.Characters.route,
+    startDestination = AppDestinations.Characters,
   ) {
-    composable(BottomNavItem.Characters.route) {
+    composable<AppDestinations.Characters> {
       CharacterListScreen { characterId ->
-        navController.navigate("character_detail/$characterId")
+        navController.navigate(AppDestinations.CharacterDetail(characterId))
       }
     }
 
-    composable(BottomNavItem.Locations.route) {
+    composable<AppDestinations.Locations> {
       LocationListScreen(
         onLocationClick = { locationId ->
-          navController.navigate("location_detail/$locationId")
+          navController.navigate(AppDestinations.LocationDetail(locationId))
         })
     }
 
-    composable(BottomNavItem.Episodes.route) {
+    composable<AppDestinations.Episodes> {
       EpisodeListScreen(
         onEpisodeClick = { episodeId ->
-          navController.navigate("episode_detail/$episodeId")
+          navController.navigate(AppDestinations.EpisodeDetail(episodeId))
         })
     }
 
-    composable(
-      route = BottomNavItem.CharacterDetail.route + "/{characterId}",
-      arguments = listOf(navArgument("characterId") { type = NavType.IntType })
-    ) { backStackEntry ->
-      val characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
-      CharacterDetailScreen(
-        characterId = characterId
-      )
+    composable<AppDestinations.CharacterDetail> { backStackEntry ->
+      val detail = backStackEntry.toRoute<AppDestinations.CharacterDetail>()
+      CharacterDetailScreen(detail.characterId)
     }
   }
 }

@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import co.mrcomondev.pro.rickandmorty.presentation.composables.navigation.AppTopBar
 import co.mrcomondev.pro.rickandmorty.presentation.composables.navigation.BottomNavigationBar
-import co.mrcomondev.pro.rickandmorty.presentation.navigation.BottomNavItem
 import co.mrcomondev.pro.rickandmorty.presentation.navigation.NavGraph
+import co.mrcomondev.pro.rickandmorty.presentation.navigation.getCurrentDestination
 
 /**
  * Created by gesoft
@@ -20,13 +20,15 @@ import co.mrcomondev.pro.rickandmorty.presentation.navigation.NavGraph
 @Composable
 fun MainScreen() {
   val navController = rememberNavController()
-  val currentRoute = remember { mutableStateOf(BottomNavItem.Characters.route) }
-  val showTopBar = currentRoute.value.startsWith(BottomNavItem.CharacterDetail.route)
-  val topBarTitle = if (showTopBar) BottomNavItem.CharacterDetail.title else null
+  val currentRoute = remember { mutableStateOf("") }
+
+  val currentDestination = getCurrentDestination(currentRoute.value)
+  val showTopBar = currentRoute.value.contains("CharacterDetail")
+  val topBarTitle = if (showTopBar) "Character Details" else null
 
   LaunchedEffect(navController) {
     navController.currentBackStackEntryFlow.collect { entry ->
-      currentRoute.value = entry.destination.route ?: BottomNavItem.Characters.route
+      currentRoute.value = entry.destination.route ?: ""
     }
   }
 
@@ -34,7 +36,7 @@ fun MainScreen() {
     bottomBar = {
       BottomNavigationBar(
         navController = navController,
-        currentRoute = currentRoute.value
+        currentRoute = currentDestination
       )
     },
     topBar = {
