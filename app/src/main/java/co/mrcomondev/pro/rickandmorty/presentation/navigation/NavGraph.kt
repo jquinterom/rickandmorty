@@ -26,10 +26,7 @@ fun NavGraph(navController: NavHostController) {
     }
 
     composable<AppDestinations.Locations> {
-      LocationListScreen(
-        onLocationClick = { locationId ->
-          navController.navigate(AppDestinations.LocationDetail(locationId))
-        })
+      LocationListScreen()
     }
 
     composable<AppDestinations.Episodes> {

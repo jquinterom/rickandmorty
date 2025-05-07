@@ -1,4 +1,4 @@
-package co.mrcomondev.pro.rickandmorty.presentation.composables
+package co.mrcomondev.pro.rickandmorty.presentation.composables.characters
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

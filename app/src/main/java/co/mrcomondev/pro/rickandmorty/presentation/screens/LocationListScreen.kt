@@ -1,15 +1,20 @@
 package co.mrcomondev.pro.rickandmorty.presentation.screens
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenError
 import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenLoading
+import co.mrcomondev.pro.rickandmorty.presentation.composables.locations.LocationItem
 import co.mrcomondev.pro.rickandmorty.presentation.viewmodel.LocationListViewModel
 
 /**
@@ -19,7 +24,6 @@ import co.mrcomondev.pro.rickandmorty.presentation.viewmodel.LocationListViewMod
 fun LocationListScreen(
   modifier: Modifier = Modifier,
   viewModel: LocationListViewModel = hiltViewModel(),
-  onLocationClick: (Int) -> Unit
 ) {
   val lazyPagingItems = viewModel.locationsPagingFlow.collectAsLazyPagingItems()
 
@@ -38,7 +42,16 @@ fun LocationListScreen(
       }
 
       else -> {
-        Text(lazyPagingItems.itemCount.toString())
+        LazyColumn(contentPadding = PaddingValues(16.dp)) {
+          items(
+            count = lazyPagingItems.itemCount,
+            key = { index -> lazyPagingItems[index]?.id ?: index }) { index ->
+            lazyPagingItems[index]?.let { location ->
+              LocationItem(modifier = Modifier, location = location)
+              Spacer(modifier = Modifier.height(8.dp))
+            }
+          }
+        }
       }
     }
   }

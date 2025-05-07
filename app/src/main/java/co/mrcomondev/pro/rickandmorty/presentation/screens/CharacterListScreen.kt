@@ -12,10 +12,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import co.mrcomondev.pro.rickandmorty.presentation.composables.CharacterItem
 import co.mrcomondev.pro.rickandmorty.presentation.composables.ErrorItem
 import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenError
 import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenLoading
+import co.mrcomondev.pro.rickandmorty.presentation.composables.characters.CharacterItem
 import co.mrcomondev.pro.rickandmorty.presentation.viewmodel.CharacterListViewModel
 
 /**
@@ -57,7 +57,6 @@ fun CharacterListScreen(
             }
           }
 
-          // Mostrar loading state al final
           item {
             if (lazyPagingItems.loadState.append is LoadState.Loading) {
               FullScreenLoading()
