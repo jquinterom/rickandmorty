@@ -17,7 +17,7 @@ import co.mrcomondev.pro.rickandmorty.presentation.screens.LocationListScreen
 fun NavGraph(navController: NavHostController) {
   NavHost(
     navController = navController,
-    startDestination = AppDestinations.Characters,
+    startDestination = AppDestinations.Episodes,
   ) {
     composable<AppDestinations.Characters> {
       CharacterListScreen { characterId ->
@@ -30,10 +30,7 @@ fun NavGraph(navController: NavHostController) {
     }
 
     composable<AppDestinations.Episodes> {
-      EpisodeListScreen(
-        onEpisodeClick = { episodeId ->
-          navController.navigate(AppDestinations.EpisodeDetail(episodeId))
-        })
+      EpisodeListScreen()
     }
 
     composable<AppDestinations.CharacterDetail> { backStackEntry ->

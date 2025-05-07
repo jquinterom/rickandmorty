@@ -1,9 +1,7 @@
 package co.mrcomondev.pro.rickandmorty.presentation.screens
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -28,47 +26,45 @@ fun CharacterListScreen(
 ) {
   val lazyPagingItems = viewModel.charactersPagingFlow.collectAsLazyPagingItems()
 
-  Box(modifier = Modifier.fillMaxSize()) {
-    when (lazyPagingItems.loadState.refresh) {
-      is LoadState.Loading -> {
-        FullScreenLoading()
-      }
+  when (lazyPagingItems.loadState.refresh) {
+    is LoadState.Loading -> {
+      FullScreenLoading()
+    }
 
-      is LoadState.Error -> {
-        val error = (lazyPagingItems.loadState.refresh as LoadState.Error).error
-        FullScreenError(
-          message = error.localizedMessage ?: "Error al cargar los personajes",
-          onRetry = { lazyPagingItems.retry() }
-        )
-      }
+    is LoadState.Error -> {
+      val error = (lazyPagingItems.loadState.refresh as LoadState.Error).error
+      FullScreenError(
+        message = error.localizedMessage ?: "Error al cargar los personajes",
+        onRetry = { lazyPagingItems.retry() }
+      )
+    }
 
-      else -> {
-        LazyColumn(contentPadding = PaddingValues(16.dp)) {
-          items(
-            count = lazyPagingItems.itemCount,
-            key = { index -> lazyPagingItems[index]?.id ?: index },
-          ) { index ->
-            lazyPagingItems[index]?.let { character ->
-              CharacterItem(
-                character = character,
-                onClick = { onCharacterClick(character.id) }
-              )
-              Spacer(modifier = Modifier.height(8.dp))
-            }
+    else -> {
+      LazyColumn(contentPadding = PaddingValues(16.dp)) {
+        items(
+          count = lazyPagingItems.itemCount,
+          key = { index -> lazyPagingItems[index]?.id ?: index },
+        ) { index ->
+          lazyPagingItems[index]?.let { character ->
+            CharacterItem(
+              character = character,
+              onClick = { onCharacterClick(character.id) }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+          }
+        }
+
+        item {
+          if (lazyPagingItems.loadState.append is LoadState.Loading) {
+            FullScreenLoading()
           }
 
-          item {
-            if (lazyPagingItems.loadState.append is LoadState.Loading) {
-              FullScreenLoading()
-            }
-
-            if (lazyPagingItems.loadState.append is LoadState.Error) {
-              val error = (lazyPagingItems.loadState.append as LoadState.Error).error
-              ErrorItem(
-                message = error.localizedMessage ?: "Error al cargar",
-                onRetry = { lazyPagingItems.retry() }
-              )
-            }
+          if (lazyPagingItems.loadState.append is LoadState.Error) {
+            val error = (lazyPagingItems.loadState.append as LoadState.Error).error
+            ErrorItem(
+              message = error.localizedMessage ?: "Error al cargar",
+              onRetry = { lazyPagingItems.retry() }
+            )
           }
         }
       }
