@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
  * Created by gesoft
  */
 @Composable
-fun ErrorItem(message: String, modifier: Modifier = Modifier, onRetry: () -> Unit = {}) {
+fun ErrorItem(message: String, modifier: Modifier = Modifier, onRetry: (() -> Unit)? = null) {
   Column(
     modifier = modifier
       .fillMaxWidth()
@@ -32,8 +32,10 @@ fun ErrorItem(message: String, modifier: Modifier = Modifier, onRetry: () -> Uni
       style = MaterialTheme.typography.bodyMedium
     )
     Spacer(modifier = Modifier.height(8.dp))
-    Button(onClick = onRetry) {
-      Text("Reintentar")
+    if (onRetry != null) {
+      Button(onClick = onRetry) {
+        Text("Retry")
+      }
     }
   }
 }

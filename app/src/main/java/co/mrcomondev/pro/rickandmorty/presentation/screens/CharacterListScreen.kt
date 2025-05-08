@@ -62,7 +62,7 @@ fun CharacterListScreen(
           if (lazyPagingItems.loadState.append is LoadState.Error) {
             val error = (lazyPagingItems.loadState.append as LoadState.Error).error
             ErrorItem(
-              message = error.localizedMessage ?: "Error al cargar",
+              message = error.localizedMessage ?: "Error to load characters",
               onRetry = { lazyPagingItems.retry() }
             )
           }

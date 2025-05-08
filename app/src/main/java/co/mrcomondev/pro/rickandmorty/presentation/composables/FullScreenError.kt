@@ -32,8 +32,10 @@ fun FullScreenError(message: String, onRetry: () -> Unit) {
       style = MaterialTheme.typography.bodyLarge
     )
     Spacer(modifier = Modifier.height(16.dp))
-    Button(onClick = onRetry) {
-      Text("Reintentar")
+    if(onRetry === {}) {
+      Button(onClick = onRetry) {
+        Text("Retry")
+      }
     }
   }
 }
