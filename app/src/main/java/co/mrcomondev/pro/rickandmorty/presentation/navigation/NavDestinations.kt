@@ -31,12 +31,6 @@ sealed class AppDestinations() {
   @Serializable
   data class CharacterDetail(val characterId: Int) : AppDestinations()
 
-  @Serializable
-  data class LocationDetail(val locationId: Int) : AppDestinations()
-
-  @Serializable
-  data class EpisodeDetail(val episodeId: Int) : AppDestinations()
-
   companion object {
     fun getBottomNavItems(): List<BottomNavItem> = listOf(
       BottomNavItem(
@@ -64,8 +58,6 @@ fun getCurrentDestination(currentRoute: String?): AppDestinations? {
     currentRoute?.contains("AppDestinations.Locations") == true -> AppDestinations.Locations
     currentRoute?.contains("AppDestinations.Episodes") == true -> AppDestinations.Episodes
     currentRoute?.contains("CharacterDetail") == true -> AppDestinations.Characters
-    currentRoute?.contains("LocationDetail") == true -> AppDestinations.Locations
-    currentRoute?.contains("EpisodeDetail") == true -> AppDestinations.Episodes
     else -> null
   }
 }
