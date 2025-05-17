@@ -100,4 +100,9 @@ dependencies {
 
   // Constrains
   implementation(libs.androidx.constraintlayout.compose)
+
+  // Datastore
+  implementation("androidx.datastore:datastore-preferences:1.1.6")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.0")
 }

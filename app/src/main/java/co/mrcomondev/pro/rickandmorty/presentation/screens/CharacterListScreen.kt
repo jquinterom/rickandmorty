@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,6 +16,7 @@ import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenError
 import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenLoading
 import co.mrcomondev.pro.rickandmorty.presentation.composables.characters.CharacterItem
 import co.mrcomondev.pro.rickandmorty.presentation.viewmodel.CharacterListViewModel
+import co.mrcomondev.pro.rickandmorty.presentation.viewmodel.CommonViewModel
 
 /**
  * Created by gesoft
@@ -22,6 +24,7 @@ import co.mrcomondev.pro.rickandmorty.presentation.viewmodel.CharacterListViewMo
 @Composable
 fun CharacterListScreen(
   viewModel: CharacterListViewModel = hiltViewModel(),
+  commonViewModel: CommonViewModel = hiltViewModel(),
   onCharacterClick: (Int) -> Unit
 ) {
   val lazyPagingItems = viewModel.charactersPagingFlow.collectAsLazyPagingItems()
@@ -34,7 +37,7 @@ fun CharacterListScreen(
     is LoadState.Error -> {
       val error = (lazyPagingItems.loadState.refresh as LoadState.Error).error
       FullScreenError(
-        message = error.localizedMessage ?: "Error al cargar los personajes",
+        message = error.localizedMessage ?: "Error to load characters",
         onRetry = { lazyPagingItems.retry() }
       )
     }
@@ -48,7 +51,15 @@ fun CharacterListScreen(
           lazyPagingItems[index]?.let { character ->
             CharacterItem(
               character = character,
-              onClick = { onCharacterClick(character.id) }
+              onClick = { onCharacterClick(character.id) },
+              isFavorite = commonViewModel.isFavoriteCharacter(character.id.toString())
+                .collectAsState(initial = false).value,
+              updateFavorite = { isFavorite ->
+                commonViewModel.updateFavoriteCharacter(
+                  characterId = character.id.toString(),
+                  isFavorite = isFavorite
+                )
+              }
             )
             Spacer(modifier = Modifier.height(8.dp))
           }
