@@ -35,7 +35,9 @@ class CharacterItemTest {
     composeTestRule.setContent {
       CharacterItem(
         character = character,
-        onClick = {}
+        onClick = {},
+        isFavorite = false,
+        updateFavorite = {}
       )
     }
 
@@ -47,7 +49,9 @@ class CharacterItemTest {
     composeTestRule.setContent {
       CharacterItem(
         character = character,
-        onClick = {}
+        onClick = {},
+        isFavorite = false,
+        updateFavorite = {}
       )
     }
 
