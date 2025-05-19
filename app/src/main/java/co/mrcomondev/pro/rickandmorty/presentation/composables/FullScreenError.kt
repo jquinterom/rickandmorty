@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
  * Created by gesoft
  */
 @Composable
-fun FullScreenError(message: String, onRetry: () -> Unit) {
+fun FullScreenError(message: String, onRetry: (() -> Unit)? = null) {
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -32,7 +32,7 @@ fun FullScreenError(message: String, onRetry: () -> Unit) {
       style = MaterialTheme.typography.bodyLarge
     )
     Spacer(modifier = Modifier.height(16.dp))
-    if(onRetry === {}) {
+    if(onRetry != null) {
       Button(onClick = onRetry) {
         Text("Retry")
       }

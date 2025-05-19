@@ -4,7 +4,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import co.mrcomondev.pro.rickandmorty.presentation.composables.ErrorItem
+import co.mrcomondev.pro.rickandmorty.presentation.composables.FullScreenError
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,31 +13,36 @@ import org.junit.runner.RunWith
  * Created by gesoft
  */
 @RunWith(AndroidJUnit4::class)
-class ErrorItemTest {
-
+class FullScreenErrorTest {
   @get:Rule
   val composeTestRule = createComposeRule()
 
   @Test
-  fun errorItem_DisplaysCorrectMessage() {
-    val testMessage = "Test error message"
-
+  fun textErrorIsShowing() {
+    val testMessage = "Error"
     composeTestRule.setContent {
-      ErrorItem(message = testMessage)
+      FullScreenError(message = testMessage, onRetry = {})
     }
-    composeTestRule.onNodeWithText(testMessage).assertExists()
+
+    composeTestRule.onNodeWithText(testMessage)
   }
 
   @Test
-  fun errorItem_RetryButtonWorks() {
+  fun textMessageIsIncorrect() {
+    val testMessage = "Error Message"
+    composeTestRule.setContent {
+      FullScreenError(message = "Error", onRetry = {})
+    }
+    composeTestRule.onNodeWithText(testMessage).assertDoesNotExist()
+  }
+
+  @Test
+  fun clickOnButtonRetryWorks() {
     var retryClicked = false
     val onRetry: () -> Unit = { retryClicked = true }
 
     composeTestRule.setContent {
-      ErrorItem(
-        message = "Error",
-          onRetry = onRetry
-      )
+      FullScreenError(message = "Error", onRetry = onRetry)
     }
 
     composeTestRule.onNodeWithText("Retry").performClick()
@@ -45,13 +50,11 @@ class ErrorItemTest {
   }
 
   @Test
-  fun errorItem_WithNullRetryAction_HidesButton() {
+  fun buttonDoesNotExists() {
     composeTestRule.setContent {
-      ErrorItem(message = "Error", onRetry = null)
+      FullScreenError(message = "Error", onRetry = null)
     }
 
-    composeTestRule.onNodeWithText("Retry")
-      .assertDoesNotExist()
+    composeTestRule.onNodeWithText("Retry").assertDoesNotExist()
   }
 }
-
