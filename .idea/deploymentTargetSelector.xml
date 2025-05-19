@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="CharacterImage">
+      <SelectionState runConfigName="shouldDisplayCharacterName()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="CharacterImageTest">
+      <SelectionState runConfigName="imageIsDisplayed()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="characterImage_setsCorrectContentDescription()">
+      <SelectionState runConfigName="shouldDisplayCharacterStatus()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="characterImage_ShowsLoadingIndicator()">
+      <SelectionState runConfigName="CharacterItemTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="characterImage_ImageLoadedCorrectly()">
+      <SelectionState runConfigName="shouldItemHasTextStyle()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
