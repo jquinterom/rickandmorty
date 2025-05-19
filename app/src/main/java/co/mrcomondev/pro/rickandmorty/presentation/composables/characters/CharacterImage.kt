@@ -13,17 +13,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.SubcomposeAsyncImage
+import coil.imageLoader
 
 /**
  * Created by gesoft
  */
 @Composable
-fun CharacterImage(modifier: Modifier = Modifier, image: String, name: String) {
+fun CharacterImage(
+  modifier: Modifier = Modifier,
+  image: String,
+  name: String,
+  imageLoader: ImageLoader = LocalContext.current.imageLoader
+) {
   SubcomposeAsyncImage(
     model = image,
     contentDescription = name,
+    imageLoader = imageLoader,
     modifier = modifier
       .clip(CircleShape),
     contentScale = ContentScale.Crop,
@@ -32,7 +42,7 @@ fun CharacterImage(modifier: Modifier = Modifier, image: String, name: String) {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
       ) {
-        CircularProgressIndicator(modifier = Modifier.size(32.dp))
+        CircularProgressIndicator(modifier = Modifier.size(32.dp).testTag("loadingIndicator"))
       }
     },
     error = {
