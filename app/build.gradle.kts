@@ -56,6 +56,10 @@ dependencies {
   implementation(libs.androidx.ui.tooling.preview)
   implementation(libs.androidx.material3)
   testImplementation(libs.junit)
+
+  testImplementation(libs.kotlinx.coroutines.test)
+  testImplementation(libs.mockk)
+
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
   androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -102,7 +106,6 @@ dependencies {
   implementation(libs.androidx.constraintlayout.compose)
 
   // Datastore
-  implementation("androidx.datastore:datastore-preferences:1.1.6")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.0")
+  implementation(libs.androidx.datastore.preferences)
+  implementation(libs.androidx.lifecycle.runtime.ktx)
 }

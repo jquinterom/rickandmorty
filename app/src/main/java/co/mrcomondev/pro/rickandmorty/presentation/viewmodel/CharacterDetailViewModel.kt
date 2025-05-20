@@ -31,7 +31,7 @@ class CharacterDetailViewModel @Inject constructor(
   fun loadCharacter(characterId: Int) {
     viewModelScope.launch {
       _characterState.value = CharacterState.Loading
-      _episodesState.value = EpisodesState.Loading
+      _episodesState.value  = EpisodesState.Loading
 
       when (val result = getCharacterUseCase(characterId)) {
         is Result.Success -> {
@@ -41,8 +41,9 @@ class CharacterDetailViewModel @Inject constructor(
 
         is Result.Failure -> {
           _characterState.value = CharacterState.Error(
-            result.exception.message ?: "Error al cargar el personaje"
+            result.exception.message ?: "Error to load character"
           )
+          _episodesState.value  = EpisodesState.Error("Character not found, episodes not loaded")
         }
       }
     }
@@ -58,7 +59,7 @@ class CharacterDetailViewModel @Inject constructor(
       _episodesState.value = EpisodesState.Success(episodes)
     } catch (e: Exception) {
       _episodesState.value = EpisodesState.Error(
-        e.message ?: "Error al cargar los episodios"
+        e.message ?: "Error to load episodes"
       )
     }
   }
