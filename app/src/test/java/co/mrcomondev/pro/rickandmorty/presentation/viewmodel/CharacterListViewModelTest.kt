@@ -75,8 +75,11 @@ class CharacterListViewModelTest {
   @Test
   fun charactersPagingFlow_is_empty() = runTest {
     val fakePagingData = flowOf(PagingData.empty<CharacterDomain>())
+
     every { mockGetCharacterStreamUseCase.invoke() } returns fakePagingData
+
     viewModel = CharacterListViewModel(mockGetCharacterStreamUseCase)
+
     val differ: AsyncPagingDataDiffer<CharacterDomain> = AsyncPagingDataDiffer(
       diffCallback = CharacterDiffCallback(),
       updateCallback = NoopListCallback(),
@@ -93,7 +96,6 @@ class CharacterListViewModelTest {
     assertEquals(0, differ.snapshot().size)
     job.cancel()
   }
-
 
   @Test
   fun charactersPagingFlow_items_are_correctly_mapped() = runTest {
@@ -150,7 +152,6 @@ class CharacterListViewModelTest {
 
     job.cancel()
   }
-
 
 }
 
