@@ -52,7 +52,7 @@ class CharactersDataStoreTest {
   @After
   fun tearDown() {
     Dispatchers.resetMain()
-    characterIdsToModify = setOf<String>()
+    characterIdsToModify = setOf()
   }
 
   @Test
